@@ -1,28 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import Searchbar from './components/Searchbar/Searchbar';
-import ImageGallery from './components/ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
 import { AppContainer } from './App.styled';
 
-class App extends Component {
-  state = {
-    searchQuery: '',
-  };
+function App() {
+  const [query, setQuery] = useState(() => '');
 
-  onSearchQuery = query => {
-    this.setState({ searchQuery: query });
-  };
+  console.log(query);
 
-  render() {
-    return (
-      <AppContainer>
-        <Searchbar onSubmit={this.onSearchQuery} />
-        <ImageGallery query={this.state.searchQuery} />
-        <ToastContainer />
-      </AppContainer>
-    );
-  }
+  return (
+    <AppContainer>
+      <Searchbar setQuery={setQuery} />
+      {/* <ImageGallery query={this.state.searchQuery} /> */}
+      <ToastContainer />
+    </AppContainer>
+  );
 }
 
 export default App;
