@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { FaSearch } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,10 +10,10 @@ import {
   ButtonLabel,
 } from './Searchbar.styled';
 
-function Searchbar({ setQuery }) {
+function Searchbar({ setQuery, setPage }) {
   const [currentInputValue, setCurrentInputValue] = useState(() => '');
 
-  function onSubmitForm(event) {
+  const onSubmitForm = event => {
     event.preventDefault();
 
     if (currentInputValue.trim() === '') {
@@ -28,7 +27,8 @@ function Searchbar({ setQuery }) {
 
     setQuery(currentInputValue);
     setCurrentInputValue('');
-  }
+    setPage(1);
+  };
 
   return (
     <Header>

@@ -9,17 +9,17 @@ function ImageGalleryItem({ imageURL, largeImageURL, tags, openModal }) {
         data-src={largeImageURL}
         alt={tags}
         data-alt={tags}
-        onClick={openModal}
+        // onClick={openModal}
       />
     </Item>
   );
 }
 
-ImageGalleryItem.propTypes = {
-  imageURL: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  openModal: PropTypes.func.isRequired,
-};
+// ImageGalleryItem.propTypes = {
+//   imageURL: PropTypes.string.isRequired,
+//   largeImageURL: PropTypes.string.isRequired,
+//   tags: PropTypes.string.isRequired,
+//   openModal: PropTypes.func.isRequired,
+// };
 
 export default ImageGalleryItem;
