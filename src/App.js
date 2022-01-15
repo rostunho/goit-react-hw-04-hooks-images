@@ -5,6 +5,8 @@ import API from './services/api';
 
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
+import Modal from 'components/Modal/Modal';
+import Spinner from 'components/Loader/Loader';
 import { AppContainer } from './App.styled';
 
 function App() {
@@ -13,6 +15,9 @@ function App() {
   const [query, setQuery] = useState(() => '');
   // const [error, setError] = useState(null);
   const [status, setStatus] = useState('idle');
+  const [showModal, setShowModal] = useState(false);
+  const [currentTags, setcurrentTags] = useState(null);
+  const [lagreImageURL, setLagreImageURL] = useState(null);
 
   useEffect(() => {
     if (!query) {
@@ -57,12 +62,27 @@ function App() {
     setPage(prevPage => prevPage + 1);
   };
 
+  const openModal = event => {
+    setShowModal(true);
+    setLagreImageURL(event.target.dataset.src);
+    setcurrentTags(event.target.dataset.alt);
+    setStatus('pending');
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setLagreImageURL(null);
+    setcurrentTags(null);
+  };
+
   function scrollToBottom() {
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: 'smooth',
     });
   }
+
+  const spinnerOverlayColor = showModal ? 'transparent' : 'rgba(0, 0, 0, 0.5)';
 
   return (
     <AppContainer>
@@ -71,7 +91,17 @@ function App() {
         images={images}
         nextPage={toNextPage}
         setStatus={setStatus}
+        openModal={openModal}
       />
+      {showModal && (
+        <Modal
+          closeModal={closeModal}
+          setStatus={setStatus}
+          largeImage={lagreImageURL}
+          tags={currentTags}
+        />
+      )}
+      {status === 'pending' && <Spinner bgColor={spinnerOverlayColor} />}
       <ToastContainer />
     </AppContainer>
   );

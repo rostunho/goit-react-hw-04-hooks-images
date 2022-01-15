@@ -8,7 +8,7 @@ import { Gallery } from './ImageGallery.styled';
 // import Modal from '../Modal/Modal';
 // import Spinner from 'components/Loader/Loader';
 
-function ImageGallery({ images, nextPage }) {
+function ImageGallery({ images, nextPage, openModal }) {
   return (
     <>
       <Gallery>
@@ -19,21 +19,12 @@ function ImageGallery({ images, nextPage }) {
               imageURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
               tags={image.tags}
-              // openModal={this.openModal}
+              openModal={openModal}
             />
           );
         })}
       </Gallery>
       {images.length !== 0 && <Button loadMore={nextPage} />}
-      {/* {showModal && (
-        <Modal
-          closeModal={this.closeModal}
-          changeStatus={this.changeStatus}
-          largeImage={largeImageURL}
-          tags={currentTags}
-        />
-      )}
-      {status === 'pending' && <Spinner bgColor={spinnerOverlayColor} />} */}
     </>
   );
 }

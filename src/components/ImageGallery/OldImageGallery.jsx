@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
@@ -109,9 +109,9 @@ class ImageGallery extends Component {
   //   const { images, showModal, largeImageURL, currentTags, status } =
   //     this.state;
 
-  //   const spinnerOverlayColor = showModal
-  //     ? 'transparent'
-  //     : 'rgba(0, 0, 0, 0.5)';
+  // const spinnerOverlayColor = showModal
+  //   ? 'transparent'
+  //   : 'rgba(0, 0, 0, 0.5)';
 
   //   return (
   //     <>
