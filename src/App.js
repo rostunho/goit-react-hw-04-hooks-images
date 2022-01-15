@@ -11,6 +11,8 @@ function App() {
   const [images, setImages] = useState(() => []);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState(() => '');
+  // const [error, setError] = useState(null);
+  const [status, setStatus] = useState('idle');
 
   useEffect(() => {
     if (!query) {
@@ -21,13 +23,34 @@ function App() {
       setImages([]);
     }
 
-    API.fetchImages(query, page).then(newImages => {
-      // console.log(newImages.hits);
-      setImages(prevImages => [...prevImages, ...newImages.hits]);
-      if (page > 1) {
-        scrollToBottom();
-      }
-    });
+    setStatus('pending');
+    API.fetchImages(query, page)
+      .then(newImages => {
+        if (newImages.hits.length === 0 && images.length === 0) {
+          setStatus('rejected');
+          return toast.error(`There is no pictures of "${query}"`, {
+            autoClose: 3000,
+          });
+        }
+
+        if (newImages.hits.length === 0 && images.length !== 0) {
+          setStatus('rejected');
+          return toast.info(`There are all pictures of "${query}"`, {
+            autoClose: 3000,
+          });
+        }
+
+        setImages(prevImages => [...prevImages, ...newImages.hits]);
+        setStatus('resolved');
+        if (page > 1) {
+          scrollToBottom();
+        }
+      })
+      .catch(error => {
+        // setError(error.message);s
+        toast.error(error.message);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, query]);
 
   const toNextPage = () => {
@@ -44,7 +67,11 @@ function App() {
   return (
     <AppContainer>
       <Searchbar setQuery={setQuery} setPage={setPage} />
-      <ImageGallery images={images} nextPage={toNextPage} />
+      <ImageGallery
+        images={images}
+        nextPage={toNextPage}
+        setStatus={setStatus}
+      />
       <ToastContainer />
     </AppContainer>
   );
