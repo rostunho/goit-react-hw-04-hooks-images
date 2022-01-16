@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,5 +51,10 @@ function Searchbar({ setQuery, setPage }) {
     </Header>
   );
 }
+
+Searchbar.propTypes = {
+  setQuery: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
+};
 
 export default Searchbar;

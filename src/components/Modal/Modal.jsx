@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 import { Overlay, ModalBox } from './Modal.styled';
 
 function Modal({ closeModal, setStatus, largeImage, tags }) {
@@ -43,5 +44,12 @@ function Modal({ closeModal, setStatus, largeImage, tags }) {
     document.getElementById('modal-root'),
   );
 }
+
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  largeImage: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+};
 
 export default Modal;

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-
 import API from './services/api';
-
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import Modal from 'components/Modal/Modal';
@@ -10,10 +8,9 @@ import Spinner from 'components/Loader/Loader';
 import { AppContainer } from './App.styled';
 
 function App() {
-  const [images, setImages] = useState(() => []);
+  const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState(() => '');
-  // const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
   const [status, setStatus] = useState('idle');
   const [showModal, setShowModal] = useState(false);
   const [currentTags, setcurrentTags] = useState(null);
@@ -52,7 +49,6 @@ function App() {
         }
       })
       .catch(error => {
-        // setError(error.message);s
         toast.error(error.message);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,12 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import { toast } from 'react-toastify';
-
-// import API from '../../services/api';
+import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Button from '../Button/Button';
 import { Gallery } from './ImageGallery.styled';
-// import Modal from '../Modal/Modal';
-// import Spinner from 'components/Loader/Loader';
 
 function ImageGallery({ images, nextPage, openModal }) {
   return (
@@ -28,5 +23,11 @@ function ImageGallery({ images, nextPage, openModal }) {
     </>
   );
 }
+
+ImageGallery.propTypes = {
+  images: PropTypes.array.isRequired,
+  nextPage: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+};
 
 export default ImageGallery;

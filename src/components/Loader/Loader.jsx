@@ -1,6 +1,6 @@
 import Loader from 'react-loader-spinner';
 import { createPortal } from 'react-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { LoaderContainer, LoaderOverlay } from './Loader.styled';
 
 function Spinner({ bgColor }) {
@@ -13,5 +13,9 @@ function Spinner({ bgColor }) {
     document.getElementById('modal-root'),
   );
 }
+
+Spinner.propTypes = {
+  bgColor: PropTypes.string.isRequired,
+};
 
 export default Spinner;
