@@ -11,15 +11,15 @@ import {
   ButtonLabel,
 } from './Searchbar.styled';
 
-function Searchbar({ setQuery, setPage }) {
+function Searchbar({ setQuery, setPage, setImages }) {
   const [currentInputValue, setCurrentInputValue] = useState(() => '');
 
   const onSubmitForm = event => {
     event.preventDefault();
 
-    if (currentInputValue.trim() === '') {
-      console.log('toast test');
+    setImages([]);
 
+    if (currentInputValue.trim() === '') {
       return toast.warn('Your search query is empty', {
         position: 'top-right',
         autoClose: 3000,

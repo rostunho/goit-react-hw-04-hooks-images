@@ -49,6 +49,7 @@ function App() {
         }
       })
       .catch(error => {
+        setStatus('rejected');
         toast.error(error.message);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +83,7 @@ function App() {
 
   return (
     <AppContainer>
-      <Searchbar setQuery={setQuery} setPage={setPage} />
+      <Searchbar setQuery={setQuery} setPage={setPage} setImages={setImages} />
       <ImageGallery
         images={images}
         nextPage={toNextPage}
