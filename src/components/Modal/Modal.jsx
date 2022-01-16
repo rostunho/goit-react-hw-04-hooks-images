@@ -1,12 +1,13 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Overlay, ModalBox } from './Modal.styled';
 
 function Modal({ closeModal, setStatus, largeImage, tags }) {
   const imageRef = useRef(null);
-  const stoppingElement = imageRef.current;
 
   useEffect(() => {
+    const stoppingElement = imageRef.current;
+
     window.addEventListener('keydown', onPressEsc);
     stoppingElement.addEventListener('load', onLoadImage);
 
@@ -14,7 +15,6 @@ function Modal({ closeModal, setStatus, largeImage, tags }) {
       window.removeEventListener('keydown', onPressEsc);
       stoppingElement.removeEventListener('load', onLoadImage);
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
