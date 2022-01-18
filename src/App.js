@@ -59,10 +59,10 @@ function App() {
     setPage(prevPage => prevPage + 1);
   };
 
-  const openModal = event => {
+  const openModal = (largeImage, alt) => {
     setShowModal(true);
-    setLagreImageURL(event.target.dataset.src);
-    setcurrentTags(event.target.dataset.alt);
+    setLagreImageURL(largeImage);
+    setcurrentTags(alt);
     setStatus('pending');
   };
 
@@ -70,6 +70,12 @@ function App() {
     setShowModal(false);
     setLagreImageURL(null);
     setcurrentTags(null);
+  };
+
+  const onNewQuery = newQuery => {
+    setImages([]);
+    setQuery(newQuery);
+    setPage(1);
   };
 
   function scrollToBottom() {
@@ -83,7 +89,7 @@ function App() {
 
   return (
     <AppContainer>
-      <Searchbar setQuery={setQuery} setPage={setPage} setImages={setImages} />
+      <Searchbar onNewQuery={onNewQuery} />
       <ImageGallery
         images={images}
         nextPage={toNextPage}

@@ -11,13 +11,11 @@ import {
   ButtonLabel,
 } from './Searchbar.styled';
 
-function Searchbar({ setQuery, setPage, setImages }) {
+function Searchbar({ onNewQuery }) {
   const [currentInputValue, setCurrentInputValue] = useState(() => '');
 
   const onSubmitForm = event => {
     event.preventDefault();
-
-    setImages([]);
 
     if (currentInputValue.trim() === '') {
       return toast.warn('Your search query is empty', {
@@ -26,9 +24,8 @@ function Searchbar({ setQuery, setPage, setImages }) {
       });
     }
 
-    setQuery(currentInputValue);
+    onNewQuery(currentInputValue);
     setCurrentInputValue('');
-    setPage(1);
   };
 
   return (
@@ -53,8 +50,7 @@ function Searchbar({ setQuery, setPage, setImages }) {
 }
 
 Searchbar.propTypes = {
-  setQuery: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired,
+  onNewQuery: PropTypes.func.isRequired,
 };
 
 export default Searchbar;
